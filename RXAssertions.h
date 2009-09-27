@@ -26,9 +26,9 @@
 
 #define RXAssertNil(_thing) {\
 	__typeof__(_thing) __thing = (_thing);\
-	STAssertNil(__thing, @"%s was unexpectedly %@, not nil.", #_thing, __thing);\
+	if(__thing != nil) STFail(@"%s was unexpectedly %@, not nil.", #_thing, __thing);\
 }
-#define RXAssertNotNil(_thing) STAssertNotNil(_thing, @"%s was unexpectedly nil.", #_thing)
+#define RXAssertNotNil(_thing) if((_thing) == nil) STFail(@"%s was unexpectedly nil.", #_thing)
 
 
 #define RXUnionCast(x, toType) (((union{__typeof__(x) a; toType b;})x).b)
