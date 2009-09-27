@@ -15,29 +15,41 @@ All of these log source for the condition/expression as appropriate. Anything el
 
 -	**`RXAssert(condition)`**
 
-	Asserts that `condition` is true.
+	Asserts that `condition` is true. Failures look like this:
+	
+		<condition> was unexpectedly false.
 
 -	**`RXAssertFalse(condition)`**
 
-	Asserts that `condition` is false.
+	Asserts that `condition` is false. Failures look like this:
+	
+		<condition> was unexpectedly true.
 
 -	**`RXAssertEquals(actual, expected)`**
 
 	Asserts that the actual value is equal to the expected value; if it’s not, it logs what it actually was.
 	
-	This is valid for use with objects, scalars (including floats; see RXRound for more), structs, and really anything that you’ve registered a comparator for. See `RXAssertionHelper` for more info.
+	This is valid for use with objects, scalars (including floats; see RXRound for more), structs, and really anything that you’ve registered a comparator for. See `RXAssertionHelper` for more info. Failures look like this:
+	
+		<actual expression> has value <actual value>, not expected value <expected value>.
 
 -	**`RXAssertNotEquals(actual, unexpected)`**
 
-	Asserts that the actual value is not equal to the unexpected value; if it is, it logs what it unexpectedly was.
+	Asserts that the actual value is not equal to the unexpected value; if it is, it logs what it unexpectedly was. Failures look like this:
+	
+		<actual expression> has unexpected value <actual value>.
 
 -	**`RXAssertNil(object)`**
 
-	Asserts that the object is nil. If it isn’t, it logs what it actually was.
+	Asserts that the object is nil. If it isn’t, it logs what it actually was. Failures look like this:
+	
+		<expression> was unexpectedly <expression value>, not nil.
 
 -	**`RXAssertNotNil(object)`**
 
 	Asserts that the object is not nil.
+	
+		<expression> was unexpectedly nil.
 
 
 #Helper Macros

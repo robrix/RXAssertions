@@ -6,9 +6,16 @@
 
 // Assertion macros that don’t require you to describe the assertion. Perfect for use with intention-revealing code.
 
-#define RXAssert(_expression) STAssertTrue(_expression, @"%s was unexpectedly false.", #_expression)
-#define RXAssertFalse(_expression) STAssertFalse(_expression, @"%s was unexpectedly true.", #_expression)
-
+#define RXAssert(_expression) {\
+	__typeof__(_expression) __condition = (_expression);\
+	if(!__condition)\
+		STFail(@"%s was unexpectedly false.", #_expression);\
+}
+#define RXAssertFalse(_expression) {\
+	__typeof__(_expression) __condition = (_expression);\
+	if(__condition)\
+		STFail(@"%s was unexpectedly true.", #_expression);\
+}
 
 // casts the expected value to the type of the actual value. will fail (and rightly so) if you try crazy casts like struct to pointer.
 #define RXAssertEquals(_actual, _expected) {\
