@@ -26,4 +26,10 @@
 	RXAssertNotNil(object);
 }
 
+-(void)testCanAddOptionalFailureMessages {
+	BOOL condition = NO;
+	RXAssert(condition, @"This is a demonstration of an %@ failure", @"RXAssert");
+	RXAssertFalse(!condition, @"This is a demonstration of an %@ failure", @"RXAssertFalse");
+}
+
 @end

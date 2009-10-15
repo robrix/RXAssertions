@@ -6,15 +6,18 @@
 
 // Assertion macros that don’t require you to describe the assertion. Perfect for use with intention-revealing code.
 
-#define RXAssert(_expression) {\
+// Don’t use this unless you’re writing your own assertions. The first argument is ignored, so the assertions can have optional messages appended to them.
+#define RXOptionalMessageFail(ignored, format, ...) STFail(format, ## __VA_ARGS__)
+
+#define RXAssert(_expression, ...) {\
 	__typeof__(_expression) __condition = (_expression);\
 	if(!__condition)\
-		STFail(@"%s was unexpectedly false.", #_expression);\
+		RXOptionalMessageFail(, ## __VA_ARGS__, @"%s was unexpectedly false.", #_expression);\
 }
-#define RXAssertFalse(_expression) {\
+#define RXAssertFalse(_expression, ...) {\
 	__typeof__(_expression) __condition = (_expression);\
 	if(__condition)\
-		STFail(@"%s was unexpectedly true.", #_expression);\
+		RXOptionalMessageFail(, ## __VA_ARGS__, @"%s was unexpectedly true.", #_expression);\
 }
 
 // casts the expected value to the type of the actual value. will fail (and rightly so) if you try crazy casts like struct to pointer.
