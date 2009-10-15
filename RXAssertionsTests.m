@@ -30,6 +30,17 @@
 	BOOL condition = NO;
 	RXAssert(condition, @"This is a demonstration of an %@ failure", @"RXAssert");
 	RXAssertFalse(!condition, @"This is a demonstration of an %@ failure", @"RXAssertFalse");
+	
+	id actual = @"one";
+	id expected = @"two";
+	RXAssertEquals(actual, expected, @"This is a demonstration of an %@ failure.", @"RXAssertEquals");
+	id unexpected = @"one";
+	RXAssertNotEquals(actual, unexpected, @"This is a demonstration of an %@ failure.", @"RXAssertNotEquals");
+	
+	id object = @"object";
+	RXAssertNil(object, @"This is a demonstration of an %@ failure.", @"RXAssertNil");
+	object = nil;
+	RXAssertNotNil(object, @"This is a demonstration of an %@ failure.", @"RXAssertNotNil");
 }
 
 @end

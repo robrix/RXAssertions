@@ -6,39 +6,39 @@
 
 // Assertion macros that don’t require you to describe the assertion. Perfect for use with intention-revealing code.
 
-// Don’t use this unless you’re writing your own assertions. The first argument is ignored, so the assertions can have optional messages appended to them.
-#define RXOptionalMessageFail(ignored, format, ...) STFail(format, ## __VA_ARGS__)
+// Don’t use this unless you’re writing your own assertions. The first argument is ignored, so the assertions can have optional messages appended to them without suffering a compiler error.
+#define RXOptionalMessageString(ignored, format, ...) [NSString stringWithFormat: (format), ## __VA_ARGS__]
 
 #define RXAssert(_expression, ...) {\
 	__typeof__(_expression) __condition = (_expression);\
 	if(!__condition)\
-		RXOptionalMessageFail(, ## __VA_ARGS__, @"%s was unexpectedly false.", #_expression);\
+		STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly false.", #_expression));\
 }
 #define RXAssertFalse(_expression, ...) {\
 	__typeof__(_expression) __condition = (_expression);\
 	if(__condition)\
-		RXOptionalMessageFail(, ## __VA_ARGS__, @"%s was unexpectedly true.", #_expression);\
+		STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly true.", #_expression));\
 }
 
 // casts the expected value to the type of the actual value. will fail (and rightly so) if you try crazy casts like struct to pointer.
-#define RXAssertEquals(_actual, _expected) {\
+#define RXAssertEquals(_actual, _expected, ...) {\
 	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(_actual))(_expected);\
 	if(![RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(_actual))]) {\
-		STFail(@"%s has value %@, not expected value %@.", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(_actual))], [RXAssertionHelper descriptionForValue: &__expected ofObjCType: @encode(__typeof__(_actual))]);\
+		STFail(@"%s has value %@, not expected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(_actual))], [RXAssertionHelper descriptionForValue: &__expected ofObjCType: @encode(__typeof__(_actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
 	}\
 }
-#define RXAssertNotEquals(_actual, _expected) {\
+#define RXAssertNotEquals(_actual, _expected, ...) {\
 	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(_actual))(_expected);\
 	if([RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(_actual))]) {\
-		STFail(@"%s has unexpected value %@.", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(_actual))]);\
+		STFail(@"%s has unexpected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(_actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
 	}\
 }
 
-#define RXAssertNil(_thing) {\
+#define RXAssertNil(_thing, ...) {\
 	__typeof__(_thing) __thing = (_thing);\
-	if(__thing != nil) STFail(@"%s was unexpectedly %@, not nil.", #_thing, __thing);\
+	if(__thing != nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly %@, not nil.", #_thing, __thing));\
 }
-#define RXAssertNotNil(_thing) if((_thing) == nil) STFail(@"%s was unexpectedly nil.", #_thing)
+#define RXAssertNotNil(_thing, ...) if((_thing) == nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly nil.", #_thing))
 
 
 #define RXUnionCast(x, toType) (((union{__typeof__(x) a; toType b;})x).b)

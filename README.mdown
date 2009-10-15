@@ -5,52 +5,63 @@
 The key ideas here are simple:
 
 1. _Simple API._ Fewer assertion macros are better.
-2. _Simple asserting._ The macros should give you a smart enough error message that you don’t need to provide your own.
-3. _Doesn’t replace `STAssert*`_. If you need to customize the message being logged, you can fall back to the `STAssert*` macros exactly where you need to.
+2. _Simple asserting._ The macros should give you a smart enough error message that you don’t need to provide your own—but you can, optionally, if you want to.
+3. _Doesn’t replace `STAssert*`_. If you want or need to fall back on the SenTestingKit macros, you can.
 
 
 #Assertion Macros
 
 All of these log source for the condition/expression as appropriate. Anything else that gets logged is noted alongside.
 
--	**`RXAssert(condition)`**
+-	**`RXAssert(condition[, message])`**
 
 	Asserts that `condition` is true. Failures look like this:
 	
 		<condition> was unexpectedly false.
+	
+	If you supply a message, it will be logged instead of the default message shown above.
 
--	**`RXAssertFalse(condition)`**
+-	**`RXAssertFalse(condition[, message])`**
 
 	Asserts that `condition` is false. Failures look like this:
 	
 		<condition> was unexpectedly true.
+	
+	If you supply a message, it will be logged instead of the default message shown above.
 
--	**`RXAssertEquals(actual, expected)`**
+-	**`RXAssertEquals(actual, expected[, message])`**
 
 	Asserts that the actual value is equal to the expected value; if it’s not, it logs what it actually was.
 	
 	This is valid for use with objects, scalars (including floats; see RXRound for more), structs, and really anything that you’ve registered a comparator for. See `RXAssertionHelper` for more info. Failures look like this:
 	
 		<actual expression> has value <actual value>, not expected value <expected value>.
-
--	**`RXAssertNotEquals(actual, unexpected)`**
+	
+	If you supply a message, it will be logged immediately after the default message shown above.
+	
+-	**`RXAssertNotEquals(actual, unexpected[, message])`**
 
 	Asserts that the actual value is not equal to the unexpected value; if it is, it logs what it unexpectedly was. Failures look like this:
 	
 		<actual expression> has unexpected value <actual value>.
+	
+	If you supply a message, it will be logged immediately after the default message shown above.
 
--	**`RXAssertNil(object)`**
+-	**`RXAssertNil(object[, message])`**
 
 	Asserts that the object is nil. If it isn’t, it logs what it actually was. Failures look like this:
 	
 		<expression> was unexpectedly <expression value>, not nil.
-
--	**`RXAssertNotNil(object)`**
+	
+	If you supply a message, it will be logged instead of the default message shown above.
+	
+-	**`RXAssertNotNil(object[, message])`**
 
 	Asserts that the object is not nil.
 	
 		<expression> was unexpectedly nil.
-
+	
+	If you supply a message, it will be logged instead of the default message shown above.
 
 #Helper Macros
 
