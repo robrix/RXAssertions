@@ -48,6 +48,7 @@
 typedef BOOL (*RXAssertionHelperComparisonFunction)(const void *aRef, const void *bRef);
 typedef NSString *(*RXAssertionHelperDescriptionFunction)(const void *ref);
 
+
 @interface RXAssertionHelper : NSObject
 
 +(void)registerComparisonFunction:(RXAssertionHelperComparisonFunction)comparator forObjCType:(const char *)type;
@@ -58,5 +59,8 @@ typedef NSString *(*RXAssertionHelperDescriptionFunction)(const void *ref);
 
 +(double)floatingPointComparisonAccuracy;
 +(void)setFloatingPointComparisonAccuracy:(double)epsilon;
+
+// returns a nicely formatted name for the test case selector
++(NSString *)humanReadableNameForTestCaseSelector:(SEL)selector;
 
 @end

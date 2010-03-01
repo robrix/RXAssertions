@@ -194,4 +194,42 @@ NSString *RXAssertionHelperNSPointDescription(const void *ref) {
 	RXAssertionHelperFloatingPointComparisonAccuracy = epsilon;
 }
 
+
++(NSString *)humanReadableNameForTestCaseSelector:(SEL)selector {
+	NSMutableArray *words = [NSMutableArray array];
+	NSScanner *scanner = [NSScanner scannerWithString: NSStringFromSelector(selector)];
+	[scanner scanString: @"test" intoString: nil]; // skip "test"
+	while(!scanner.isAtEnd) {
+		NSString *up = nil, *lo = nil;
+		unsigned cursor = scanner.scanLocation;
+		up = [scanner.string substringWithRange: NSMakeRange(cursor, 1)]; // grab the first character
+		scanner.scanLocation = cursor + 1;
+		[scanner scanCharactersFromSet: [NSCharacterSet lowercaseLetterCharacterSet] intoString: &lo];
+		[words addObject: [NSString stringWithFormat: @"%@%@", [up lowercaseString], lo ?: @""]];
+	}
+	return [words componentsJoinedByString: @" "];
+}
+
++(NSString *)humanReadableNameForTestSuiteClass:(Class)klass {
+	NSString *name = NSStringFromClass(klass);
+	NSString *result = name;
+	NSRange testsRange = [name rangeOfString: @"Tests" options: NSBackwardsSearch | NSAnchoredSearch];
+	NSRange testRange = [name rangeOfString: @"Test" options: NSBackwardsSearch | NSAnchoredSearch];
+	if(testsRange.location != NSNotFound) {
+		result = [name substringToIndex: testsRange.location];
+	} else if(testRange.location != NSNotFound) {
+		result = [name substringToIndex: testRange.location];
+	}
+	return result;
+}
+
+@end
+
+
+@implementation SenTestCase (RXAssertionsPrettierNamesForTestCases)
+
+-(NSString *)name {
+	return [NSString stringWithFormat: @"%@ %@", [RXAssertionHelper humanReadableNameForTestSuiteClass: self.class], [RXAssertionHelper humanReadableNameForTestCaseSelector: self.invocation.selector]];
+}
+
 @end
