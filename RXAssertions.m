@@ -75,11 +75,11 @@ NSString *RXAssertionHelperUInt32Description(const void *ref) {
 }
 
 NSString *RXAssertionHelperInt64Description(const void *ref) {
-	return [NSString stringWithFormat: @"%d", *RXUnionCast(ref, const int64_t *)];
+	return [NSString stringWithFormat: @"%qi", *RXUnionCast(ref, const int64_t *)];
 }
 
 NSString *RXAssertionHelperUInt64Description(const void *ref) {
-	return [NSString stringWithFormat: @"%u", *RXUnionCast(ref, const uint64_t *)];
+	return [NSString stringWithFormat: @"%qu", *RXUnionCast(ref, const uint64_t *)];
 }
 
 NSString *RXAssertionHelperFloatDescription(const void *ref) {
