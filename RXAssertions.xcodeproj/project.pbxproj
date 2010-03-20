@@ -11,6 +11,8 @@
 		D442A493106FD9BF00944F07 /* libRXAssertions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libRXAssertions.a */; };
 		D4C03B4A1063445800925A75 /* RXAssertions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C03B471063445800925A75 /* RXAssertions.h */; };
 		D4C03B4B1063445800925A75 /* RXAssertions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C03B481063445800925A75 /* RXAssertions.m */; };
+		D4F3DD2811558CC2008BB0F8 /* RXMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */; };
+		D4F3DD2911558CC2008BB0F8 /* RXMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 		D4C03B471063445800925A75 /* RXAssertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.h; sourceTree = "<group>"; };
 		D4C03B481063445800925A75 /* RXAssertions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAssertions.m; sourceTree = "<group>"; };
 		D4C03B491063445800925A75 /* RXAssertions.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.pch; sourceTree = "<group>"; };
+		D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMockObject.h; sourceTree = "<group>"; };
+		D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMockObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 				D4C03B481063445800925A75 /* RXAssertions.m */,
 				D4C03B491063445800925A75 /* RXAssertions.pch */,
 				D442A48D106FD99700944F07 /* RXAssertionsTests.m */,
+				D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */,
+				D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */,
 				D442A489106FD94900944F07 /* Tests-Info.plist */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -82,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C03B4A1063445800925A75 /* RXAssertions.h in Headers */,
+				D4F3DD2811558CC2008BB0F8 /* RXMockObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C03B4B1063445800925A75 /* RXAssertions.m in Sources */,
+				D4F3DD2911558CC2008BB0F8 /* RXMockObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
