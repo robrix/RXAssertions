@@ -4,7 +4,7 @@
 
 #import "RXAssertions.h"
 
-@interface RXAssertionsTests : SenTestCase {}
+@interface RXAssertionsTests : SenTestCase
 @end
 
 @implementation RXAssertionsTests

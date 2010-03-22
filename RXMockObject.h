@@ -4,13 +4,20 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString const *RXMockObjectNullPlaceholder;
+
 @interface RXMockObject : NSObject {
 	NSMutableDictionary *responses;
+	Class mockedClass;
 }
 
-+(RXMockObject *)mockObject;
-+(RXMockObject *)mockObjectRespondingToSelector:(SEL)selector withObject:(id)response;
++(RXMockObject *)mockObjectForClass:(Class)mockedClass;
++(RXMockObject *)mockObjectForClass:(Class)mockedClass withResponseObject:(id)response forSelector:(SEL)selector;
++(RXMockObject *)mockObjectForClass:(Class)mockedClass withResponseObject:(id)response forSelector:(SEL)selector withArgument:(id)argument;
++(RXMockObject *)mockObjectForClass:(Class)mockedClass withResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments;
 
--(void)respondToSelector:(SEL)selector withObject:(id)response;
+-(void)setResponseObject:(id)object forSelector:(SEL)selector;
+-(void)setResponseObject:(id)object forSelector:(SEL)selector withArgument:(id)argument;
+-(void)setResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments;
 
 @end

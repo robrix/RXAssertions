@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D442A48E106FD99700944F07 /* RXAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D442A48D106FD99700944F07 /* RXAssertionsTests.m */; };
 		D442A493106FD9BF00944F07 /* libRXAssertions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libRXAssertions.a */; };
+		D472095311581618003F9546 /* RXMockObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D472095211581618003F9546 /* RXMockObjectTests.m */; };
 		D4C03B4A1063445800925A75 /* RXAssertions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C03B471063445800925A75 /* RXAssertions.h */; };
 		D4C03B4B1063445800925A75 /* RXAssertions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C03B481063445800925A75 /* RXAssertions.m */; };
 		D4F3DD2811558CC2008BB0F8 /* RXMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */; };
@@ -30,6 +30,7 @@
 		D442A488106FD94900944F07 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D442A489106FD94900944F07 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		D442A48D106FD99700944F07 /* RXAssertionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAssertionsTests.m; sourceTree = "<group>"; };
+		D472095211581618003F9546 /* RXMockObjectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMockObjectTests.m; sourceTree = "<group>"; };
 		D4C03B471063445800925A75 /* RXAssertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.h; sourceTree = "<group>"; };
 		D4C03B481063445800925A75 /* RXAssertions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAssertions.m; sourceTree = "<group>"; };
 		D4C03B491063445800925A75 /* RXAssertions.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.pch; sourceTree = "<group>"; };
@@ -74,6 +75,7 @@
 				D442A48D106FD99700944F07 /* RXAssertionsTests.m */,
 				D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */,
 				D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */,
+				D472095211581618003F9546 /* RXMockObjectTests.m */,
 				D442A489106FD94900944F07 /* Tests-Info.plist */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -190,7 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D442A48E106FD99700944F07 /* RXAssertionsTests.m in Sources */,
+				D472095311581618003F9546 /* RXMockObjectTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +215,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -236,6 +239,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RXAssertions.pch;
@@ -286,6 +290,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -314,6 +319,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
