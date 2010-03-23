@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString const *RXMockObjectNullPlaceholder;
+extern NSString const *RXMockNull;
 
 @interface RXMockObject : NSObject {
 	NSMutableDictionary *responses;

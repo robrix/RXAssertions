@@ -5,7 +5,7 @@
 #import "RXMockObject.h"
 #import <objc/runtime.h>
 
-NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
+NSString const *RXMockNull = @"RXMockNull";
 
 @implementation RXMockObject
 
@@ -51,7 +51,7 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 }
 
 -(void)setResponseObject:(id)response forSelector:(SEL)selector withArgument:(id)argument {
-	[self setResponseObject: response forSelector: selector withArguments: [NSArray arrayWithObject: argument ?: RXMockObjectNullPlaceholder]];
+	[self setResponseObject: response forSelector: selector withArguments: [NSArray arrayWithObject: argument ?: RXMockNull]];
 }
 
 -(void)setResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments {
@@ -59,7 +59,7 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 	if(!responsesByArguments) {
 		[responses setObject: (responsesByArguments = [NSMutableDictionary dictionary]) forKey: NSStringFromSelector(selector)];
 	}
-	[responsesByArguments setObject: response ?: RXMockObjectNullPlaceholder forKey: arguments];
+	[responsesByArguments setObject: response ?: RXMockNull forKey: arguments];
 }
 
 -(id)responsesForSelector:(SEL)selector {
@@ -90,10 +90,10 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 		for(NSUInteger i = 2; i < invocation.methodSignature.numberOfArguments; i++) {
 			id argument;
 			[invocation getArgument: &argument atIndex: i];
-			[arguments addObject: argument ?: RXMockObjectNullPlaceholder];
+			[arguments addObject: argument ?: RXMockNull];
 		}
 		id response = [self responseForSelector: invocation.selector withArguments: [arguments copy]];
-		if(response == RXMockObjectNullPlaceholder) response = nil;
+		if(response == RXMockNull) response = nil;
 		[invocation setReturnValue: &response];
 	}
 }

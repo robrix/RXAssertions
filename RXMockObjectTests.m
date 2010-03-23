@@ -49,9 +49,9 @@
 	[mock setResponseObject: nil forSelector: @selector(nullary)];
 	[mock setResponseObject: nil forSelector: @selector(unary:) withArgument: nil];
 	[mock setResponseObject: @"" forSelector: @selector(unary:) withArgument: @""];
-	[mock setResponseObject: nil forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: RXMockObjectNullPlaceholder, RXMockObjectNullPlaceholder, nil]];
-	[mock setResponseObject: @"" forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: @"", RXMockObjectNullPlaceholder, nil]];
-	[mock setResponseObject: @"" forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: RXMockObjectNullPlaceholder, @"", nil]];
+	[mock setResponseObject: nil forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: RXMockNull, RXMockNull, nil]];
+	[mock setResponseObject: @"" forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: @"", RXMockNull, nil]];
+	[mock setResponseObject: @"" forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: RXMockNull, @"", nil]];
 	RXAssertNil([mock nullary]);
 	RXAssertNil([mock unary: nil]);
 	RXAssertNotNil([mock unary: @""]);
