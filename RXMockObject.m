@@ -51,7 +51,7 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 }
 
 -(void)setResponseObject:(id)response forSelector:(SEL)selector withArgument:(id)argument {
-	[self setResponseObject: response forSelector: selector withArguments: [NSArray arrayWithObject: argument ?: RXMockObjectNullPlaceholder]];
+	[self setResponseObject: response ?: RXMockObjectNullPlaceholder forSelector: selector withArguments: [NSArray arrayWithObject: argument ?: RXMockObjectNullPlaceholder]];
 }
 
 -(void)setResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments {
@@ -88,6 +88,7 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 			[arguments addObject: argument ?: RXMockObjectNullPlaceholder];
 		}
 		id response = [self responseForSelector: invocation.selector withArguments: [arguments copy]];
+		if(response == RXMockObjectNullPlaceholder) response = nil;
 		[invocation setReturnValue: &response];
 	}
 }
