@@ -6,7 +6,9 @@
 #import "RXMockObject.h"
 
 @interface NSObject (RXMockObjectTests)
--(id)response:(id)ignored;
+-(id)nullary;
+-(id)unary:(id)arg;
+-(id)binary:(id)arg1 method:(id)arg2;
 @end
 
 @interface RXMockObjectTests : SenTestCase {
@@ -17,45 +19,45 @@
 @implementation RXMockObjectTests
 
 -(void)setUp {
-	mock = [RXMockObject mockObjectForClass: [NSString class]];
+	mock = [RXMockObject mockObject];
 }
 
 -(void)testRespondsToNullaryMessagesWithTheGivenObject {
-	[mock setResponseObject: @"nullary response" forSelector: @selector(propertyList)];
-	RXAssertEquals([mock propertyList], @"nullary response");
+	[mock setResponseObject: @"nullary response" forSelector: @selector(nullary)];
+	RXAssertEquals([mock nullary], @"nullary response");
 }
 
 -(void)testRespondsToUnaryMessagesWithTheGivenObject {
-	[mock setResponseObject: @"result 1" forSelector: @selector(componentsSeparatedByString:) withArgument: @"argument 1"];
-	[mock setResponseObject: @"result 2" forSelector: @selector(componentsSeparatedByString:) withArgument: @"argument 2"];
-	RXAssertEquals([mock componentsSeparatedByString: @"argument 1"], @"result 1");
-	RXAssertEquals([mock componentsSeparatedByString: @"argument 2"], @"result 2");
-	RXAssertNil([mock componentsSeparatedByString: @"not specified"]);
-	RXAssertNil([mock componentsSeparatedByString: nil]);
+	[mock setResponseObject: @"result 1" forSelector: @selector(unary:) withArgument: @"argument 1"];
+	[mock setResponseObject: @"result 2" forSelector: @selector(unary:) withArgument: @"argument 2"];
+	RXAssertEquals([mock unary: @"argument 1"], @"result 1");
+	RXAssertEquals([mock unary: @"argument 2"], @"result 2");
+	RXAssertNil([mock unary: @"not specified"]);
+	RXAssertNil([mock unary: nil]);
 }
 
 -(void)testRespondsToMessagesWithNilArguments {
-	[mock setResponseObject: @"result 1" forSelector: @selector(componentsSeparatedByString:) withArgument: nil];
-	[mock setResponseObject: @"result 2" forSelector: @selector(componentsSeparatedByString:) withArgument: @"argument 2"];
-	RXAssertEquals([mock componentsSeparatedByString: nil], @"result 1");
-	RXAssertEquals([mock componentsSeparatedByString: @"argument 2"], @"result 2");
-	RXAssertNil([mock componentsSeparatedByString: @"not specified"]);
+	[mock setResponseObject: @"result 1" forSelector: @selector(unary:) withArgument: nil];
+	[mock setResponseObject: @"result 2" forSelector: @selector(unary:) withArgument: @"argument 2"];
+	RXAssertEquals([mock unary: nil], @"result 1");
+	RXAssertEquals([mock unary: @"argument 2"], @"result 2");
+	RXAssertNil([mock unary: @"not specified"]);
 }
 
 
 -(void)testAcceptsNilResponses {
-	[mock setResponseObject: nil forSelector: @selector(propertyList)];
-	[mock setResponseObject: nil forSelector: @selector(componentsSeparatedByString:) withArgument: nil];
-	[mock setResponseObject: @"" forSelector: @selector(componentsSeparatedByString:) withArgument: @""];
-	[mock setResponseObject: nil forSelector: @selector(stringByReplacingOccurrencesOfString:withString:) withArguments: [NSArray arrayWithObjects: RXMockObjectNullPlaceholder, RXMockObjectNullPlaceholder, nil]];
-	[mock setResponseObject: nil forSelector: @selector(stringByReplacingOccurrencesOfString:withString:) withArguments: [NSArray arrayWithObjects: @"", RXMockObjectNullPlaceholder, nil]];
-	[mock setResponseObject: nil forSelector: @selector(stringByReplacingOccurrencesOfString:withString:) withArguments: [NSArray arrayWithObjects: RXMockObjectNullPlaceholder, @"", nil]];
-	RXAssertNil([mock propertyList]);
-	RXAssertNil([mock componentsSeparatedByString: nil]);
-	RXAssertNotNil([mock componentsSeparatedByString: @""]);
-	RXAssertNil([mock stringByReplacingOccurrencesOfString: nil withString: nil]);
-	RXAssertNotNil([mock stringByReplacingOccurrencesOfString: @"" withString: nil]);
-	RXAssertNotNil([mock stringByReplacingOccurrencesOfString: nil withString: @""]);
+	[mock setResponseObject: nil forSelector: @selector(nullary)];
+	[mock setResponseObject: nil forSelector: @selector(unary:) withArgument: nil];
+	[mock setResponseObject: @"" forSelector: @selector(unary:) withArgument: @""];
+	[mock setResponseObject: nil forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: RXMockObjectNullPlaceholder, RXMockObjectNullPlaceholder, nil]];
+	[mock setResponseObject: @"" forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: @"", RXMockObjectNullPlaceholder, nil]];
+	[mock setResponseObject: @"" forSelector: @selector(binary:method:) withArguments: [NSArray arrayWithObjects: RXMockObjectNullPlaceholder, @"", nil]];
+	RXAssertNil([mock nullary]);
+	RXAssertNil([mock unary: nil]);
+	RXAssertNotNil([mock unary: @""]);
+	RXAssertNil([mock binary: nil method: nil]);
+	RXAssertNotNil([mock binary: @"" method: nil]);
+	RXAssertNotNil([mock binary: nil method: @""]);
 }
 
 @end

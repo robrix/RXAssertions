@@ -9,10 +9,9 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 
 @implementation RXMockObject
 
--(id)initWithClass:(Class)_mockedClass {
+-(id)init {
 	if(self = [super init]) {
 		responses = [[NSMutableDictionary alloc] init];
-		mockedClass = _mockedClass;
 	}
 	return self;
 }
@@ -22,24 +21,25 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 	[super dealloc];
 }
 
-+(RXMockObject *)mockObjectForClass:(Class)mockedClass {
-	return [[[self alloc] initWithClass: mockedClass] autorelease];
+
++(RXMockObject *)mockObject {
+	return [[[self alloc] init] autorelease];
 }
 
-+(RXMockObject *)mockObjectForClass:(Class)mockedClass withResponseObject:(id)response forSelector:(SEL)selector {
-	RXMockObject *object = [[[self alloc] initWithClass: mockedClass] autorelease];
++(RXMockObject *)mockObjectWithResponseObject:(id)response forSelector:(SEL)selector {
+	RXMockObject *object = [[[self alloc] init] autorelease];
 	[object setResponseObject: response forSelector: selector];
 	return object;
 }
 
-+(RXMockObject *)mockObjectForClass:(Class)mockedClass withResponseObject:(id)response forSelector:(SEL)selector withArgument:(id)argument {
-	RXMockObject *object = [[[self alloc] initWithClass: mockedClass] autorelease];
++(RXMockObject *)mockObjectWithResponseObject:(id)response forSelector:(SEL)selector withArgument:(id)argument {
+	RXMockObject *object = [[[self alloc] init] autorelease];
 	[object setResponseObject: response forSelector: selector withArgument: argument];
 	return object;
 }
 
-+(RXMockObject *)mockObjectForClass:(Class)mockedClass withResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments {
-	RXMockObject *object = [[[self alloc] initWithClass: mockedClass] autorelease];
++(RXMockObject *)mockObjectWithResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments {
+	RXMockObject *object = [[[self alloc] init] autorelease];
 	[object setResponseObject: response forSelector: selector withArguments: arguments];
 	return object;
 }
@@ -51,7 +51,7 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 }
 
 -(void)setResponseObject:(id)response forSelector:(SEL)selector withArgument:(id)argument {
-	[self setResponseObject: response ?: RXMockObjectNullPlaceholder forSelector: selector withArguments: [NSArray arrayWithObject: argument ?: RXMockObjectNullPlaceholder]];
+	[self setResponseObject: response forSelector: selector withArguments: [NSArray arrayWithObject: argument ?: RXMockObjectNullPlaceholder]];
 }
 
 -(void)setResponseObject:(id)response forSelector:(SEL)selector withArguments:(NSArray *)arguments {
@@ -59,7 +59,7 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 	if(!responsesByArguments) {
 		[responses setObject: (responsesByArguments = [NSMutableDictionary dictionary]) forKey: NSStringFromSelector(selector)];
 	}
-	[responsesByArguments setObject: response forKey: arguments];
+	[responsesByArguments setObject: response ?: RXMockObjectNullPlaceholder forKey: arguments];
 }
 
 -(id)responsesForSelector:(SEL)selector {
@@ -74,7 +74,12 @@ NSString const *RXMockObjectNullPlaceholder = @"RXMockObjectNullPlaceholder";
 -(NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
 	NSMethodSignature *signature = nil;
 	if([self responsesForSelector: selector]) {
-		signature = [mockedClass instanceMethodSignatureForSelector: selector];
+		NSUInteger arity = ([NSStringFromSelector(selector) componentsSeparatedByString: @":"].count - 1u);
+		NSMutableArray *argumentTypes = [NSMutableArray array];
+		for(NSUInteger i = 0; i < arity; i++) {
+			[argumentTypes addObject: [NSString stringWithUTF8String: @encode(id)]];
+		}
+		signature = [NSMethodSignature signatureWithObjCTypes: [[NSString stringWithFormat: @"%s%s%s%@", @encode(id), @encode(SEL), @encode(id), [argumentTypes componentsJoinedByString: @""]] UTF8String]];
 	}
 	return signature;
 }
