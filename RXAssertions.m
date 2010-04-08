@@ -11,91 +11,91 @@ static NSMutableDictionary *RXAssertionHelperDescriptionFunctions = nil;
 static double RXAssertionHelperFloatingPointComparisonAccuracy = 0.0;
 
 BOOL RXAssertionHelperInt8Comparison(const void *a, const void *b) {
-	return (*(RXUnionCast(a, const uint8_t *))) == (*(RXUnionCast(b, const uint8_t *)));
+	return (*(RXCast(a, const uint8_t *))) == (*(RXCast(b, const uint8_t *)));
 }
 
 BOOL RXAssertionHelperInt16Comparison(const void *a, const void *b) {
-	return (*(RXUnionCast(a, const uint16_t *))) == (*(RXUnionCast(b, const uint16_t *)));
+	return (*(RXCast(a, const uint16_t *))) == (*(RXCast(b, const uint16_t *)));
 }
 
 BOOL RXAssertionHelperInt32Comparison(const void *a, const void *b) {
-	return (*(RXUnionCast(a, const uint32_t *))) == (*(RXUnionCast(b, const uint32_t *)));
+	return (*(RXCast(a, const uint32_t *))) == (*(RXCast(b, const uint32_t *)));
 }
 
 BOOL RXAssertionHelperInt64Comparison(const void *a, const void *b) {
-	return (*(RXUnionCast(a, const uint64_t *))) == (*(RXUnionCast(b, const uint64_t *)));
+	return (*(RXCast(a, const uint64_t *))) == (*(RXCast(b, const uint64_t *)));
 }
 
 BOOL RXAssertionHelperFloatComparison(const void *a, const void *b) {
-	double _a = *RXUnionCast(a, const float *), _b = *RXUnionCast(b, const float *);
+	double _a = *RXCast(a, const float *), _b = *RXCast(b, const float *);
 	return isless(MAX(_a, _b) - MIN(_a, _b), RXAssertionHelperFloatingPointComparisonAccuracy);
 }
 
 BOOL RXAssertionHelperDoubleComparison(const void *a, const void *b) {
-	double _a = *RXUnionCast(a, const double *), _b = *RXUnionCast(b, const double *);
+	double _a = *RXCast(a, const double *), _b = *RXCast(b, const double *);
 	return isless(MAX(_a, _b) - MIN(_a, _b), RXAssertionHelperFloatingPointComparisonAccuracy);
 }
 
 BOOL RXAssertionHelperObjectComparison(const void *a, const void *b) {
-	const id _a = *RXUnionCast(a, const id *), _b = *RXUnionCast(b, const id *);
+	const id _a = *RXCast(a, const id *), _b = *RXCast(b, const id *);
 	return (_a == _b) || [_a isEqual: _b];
 }
 
 BOOL RXAssertionHelperNSPointComparison(const void *a, const void *b) {
-	return NSEqualPoints(*RXUnionCast(a, const NSPoint *), *RXUnionCast(b, const NSPoint *));
+	return NSEqualPoints(*RXCast(a, const NSPoint *), *RXCast(b, const NSPoint *));
 }
 
 
 NSString *RXAssertionHelperHexadecimalDescription(const void *ref) {
-	return [NSString stringWithFormat: @"%x", *RXUnionCast(ref, const void **)];
+	return [NSString stringWithFormat: @"%x", *RXCast(ref, const void **)];
 }
 
 NSString *RXAssertionHelperInt8Description(const void *ref) {
-	return [NSString stringWithFormat: @"%d", *RXUnionCast(ref, const int8_t *)];
+	return [NSString stringWithFormat: @"%d", *RXCast(ref, const int8_t *)];
 }
 
 NSString *RXAssertionHelperUInt8Description(const void *ref) {
-	return [NSString stringWithFormat: @"%u", *RXUnionCast(ref, const uint8_t *)];
+	return [NSString stringWithFormat: @"%u", *RXCast(ref, const uint8_t *)];
 }
 
 NSString *RXAssertionHelperInt16Description(const void *ref) {
-	return [NSString stringWithFormat: @"%d", *RXUnionCast(ref, const int16_t *)];
+	return [NSString stringWithFormat: @"%d", *RXCast(ref, const int16_t *)];
 }
 
 NSString *RXAssertionHelperUInt16Description(const void *ref) {
-	return [NSString stringWithFormat: @"%u", *RXUnionCast(ref, const uint16_t *)];
+	return [NSString stringWithFormat: @"%u", *RXCast(ref, const uint16_t *)];
 }
 
 NSString *RXAssertionHelperInt32Description(const void *ref) {
-	return [NSString stringWithFormat: @"%d", *RXUnionCast(ref, const int32_t *)];
+	return [NSString stringWithFormat: @"%d", *RXCast(ref, const int32_t *)];
 }
 
 NSString *RXAssertionHelperUInt32Description(const void *ref) {
-	return [NSString stringWithFormat: @"%u", *RXUnionCast(ref, const uint32_t *)];
+	return [NSString stringWithFormat: @"%u", *RXCast(ref, const uint32_t *)];
 }
 
 NSString *RXAssertionHelperInt64Description(const void *ref) {
-	return [NSString stringWithFormat: @"%qi", *RXUnionCast(ref, const int64_t *)];
+	return [NSString stringWithFormat: @"%qi", *RXCast(ref, const int64_t *)];
 }
 
 NSString *RXAssertionHelperUInt64Description(const void *ref) {
-	return [NSString stringWithFormat: @"%qu", *RXUnionCast(ref, const uint64_t *)];
+	return [NSString stringWithFormat: @"%qu", *RXCast(ref, const uint64_t *)];
 }
 
 NSString *RXAssertionHelperFloatDescription(const void *ref) {
-	return [NSString stringWithFormat: @"%f", *RXUnionCast(ref, const float *)];
+	return [NSString stringWithFormat: @"%f", *RXCast(ref, const float *)];
 }
 
 NSString *RXAssertionHelperDoubleDescription(const void *ref) {
-	return [NSString stringWithFormat: @"%f", *RXUnionCast(ref, const double *)];
+	return [NSString stringWithFormat: @"%f", *RXCast(ref, const double *)];
 }
 
 NSString *RXAssertionHelperObjectDescription(const void *ref) {
-	return [NSString stringWithFormat: @"%@", *RXUnionCast(ref, const id *)];
+	return [NSString stringWithFormat: @"%@", *RXCast(ref, const id *)];
 }
 
 NSString *RXAssertionHelperNSPointDescription(const void *ref) {
-	return NSStringFromPoint(*RXUnionCast(ref, const NSPoint *));
+	return NSStringFromPoint(*RXCast(ref, const NSPoint *));
 }
 
 

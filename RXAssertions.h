@@ -41,7 +41,12 @@
 #define RXAssertNotNil(_thing, ...) if((_thing) == nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly nil.", #_thing))
 
 
-#define RXUnionCast(x, toType) (((union{__typeof__(x) a; toType b;})x).b)
+#ifdef __clang__
+	// this is bad, as strict aliasing will break it, but clang doesn’t handle union casts correctly
+	#define RXCast(x, toType) *(toType *)&(x)
+#else
+	#define RXCast(x, toType) (((union{__typeof__(x) a; toType b;})x).b)
+#endif
 #define RXRound(value, place) (round((value) / (place)) * (place))
 
 
