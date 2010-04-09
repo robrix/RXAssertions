@@ -5,7 +5,7 @@
 #import "RXMockObject.h"
 #import <objc/runtime.h>
 
-NSString const *RXMockNull = @"RXMockNull";
+const NSString *RXMockNull = @"RXMockNull";
 
 @implementation RXMockObject
 
