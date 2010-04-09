@@ -11,6 +11,7 @@
 		D472095311581618003F9546 /* RXMockObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D472095211581618003F9546 /* RXMockObjectTests.m */; };
 		D4C03B4A1063445800925A75 /* RXAssertions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C03B471063445800925A75 /* RXAssertions.h */; };
 		D4C03B4B1063445800925A75 /* RXAssertions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C03B481063445800925A75 /* RXAssertions.m */; };
+		D4CE0C55116FB8E400FE6B86 /* RXAssertionHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE0C54116FB8E400FE6B86 /* RXAssertionHelperTests.m */; };
 		D4F3DD2811558CC2008BB0F8 /* RXMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */; };
 		D4F3DD2911558CC2008BB0F8 /* RXMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		D4C03B471063445800925A75 /* RXAssertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.h; sourceTree = "<group>"; };
 		D4C03B481063445800925A75 /* RXAssertions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAssertions.m; sourceTree = "<group>"; };
 		D4C03B491063445800925A75 /* RXAssertions.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.pch; sourceTree = "<group>"; };
+		D4CE0C54116FB8E400FE6B86 /* RXAssertionHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAssertionHelperTests.m; sourceTree = "<group>"; };
 		D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMockObject.h; sourceTree = "<group>"; };
 		D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMockObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				D4C03B481063445800925A75 /* RXAssertions.m */,
 				D4C03B491063445800925A75 /* RXAssertions.pch */,
 				D442A48D106FD99700944F07 /* RXAssertionsTests.m */,
+				D4CE0C54116FB8E400FE6B86 /* RXAssertionHelperTests.m */,
 				D4F3DD2611558CC2008BB0F8 /* RXMockObject.h */,
 				D4F3DD2711558CC2008BB0F8 /* RXMockObject.m */,
 				D472095211581618003F9546 /* RXMockObjectTests.m */,
@@ -193,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D472095311581618003F9546 /* RXMockObjectTests.m in Sources */,
+				D4CE0C55116FB8E400FE6B86 /* RXAssertionHelperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +267,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -276,6 +281,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

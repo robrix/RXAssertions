@@ -45,6 +45,10 @@ BOOL RXAssertionHelperNSPointComparison(const void *a, const void *b) {
 	return NSEqualPoints(*RXCast(a, const NSPoint *), *RXCast(b, const NSPoint *));
 }
 
+BOOL RXAssertionHelperNSRangeComparison(const void *a, const void *b) {
+	return NSEqualRanges(*RXCast(a, const NSRange *), *RXCast(b, const NSRange *));
+}
+
 
 NSString *RXAssertionHelperHexadecimalDescription(const void *ref) {
 	return [NSString stringWithFormat: @"%x", *RXCast(ref, const void **)];
@@ -98,6 +102,10 @@ NSString *RXAssertionHelperNSPointDescription(const void *ref) {
 	return NSStringFromPoint(*RXCast(ref, const NSPoint *));
 }
 
+NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
+	return NSStringFromRange(*RXCast(ref, const NSRange *));
+}
+
 
 @implementation RXAssertionHelper
 
@@ -128,6 +136,7 @@ NSString *RXAssertionHelperNSPointDescription(const void *ref) {
 	[self registerComparisonFunction: RXAssertionHelperObjectComparison forObjCType: @encode(Class)];
 	[self registerComparisonFunction: RXAssertionHelperNSPointComparison forObjCType: @encode(NSPoint)];
 	[self registerComparisonFunction: RXAssertionHelperNSPointComparison forObjCType: @encode(CGPoint)];
+	[self registerComparisonFunction: RXAssertionHelperNSRangeComparison forObjCType: @encode(NSRange)];
 	
 	[self registerDescriptionFunction: RXAssertionHelperHexadecimalDescription forObjCType: @encode(void *)];
 	[self registerDescriptionFunction: RXAssertionHelperInt8Description forObjCType: @encode(int8_t)];
@@ -144,6 +153,7 @@ NSString *RXAssertionHelperNSPointDescription(const void *ref) {
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(Class)];
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(NSPoint)];
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(CGPoint)];
+	[self registerDescriptionFunction: RXAssertionHelperNSRangeDescription forObjCType: @encode(NSRange)];
 }
 
 
