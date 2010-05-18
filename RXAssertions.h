@@ -54,6 +54,11 @@ typedef BOOL (*RXAssertionHelperComparisonFunction)(const void *aRef, const void
 typedef NSString *(*RXAssertionHelperDescriptionFunction)(const void *ref);
 
 
+// making these functions available for registering Polymorph types
+BOOL RXAssertionHelperObjectComparison(const void *a, const void *b);
+NSString *RXAssertionHelperObjectDescription(const void *ref);
+
+
 @interface RXAssertionHelper : NSObject
 
 +(void)registerComparisonFunction:(RXAssertionHelperComparisonFunction)comparator forObjCType:(const char *)type;
