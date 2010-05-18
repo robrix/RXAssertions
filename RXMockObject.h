@@ -6,7 +6,7 @@
 
 // use RXMockNull to represent a nil return or a nil value in an argument list.
 // this is used instead of +[NSNull null] to let us use +[NSNull null] in our tests themselves.
-extern const NSString *RXMockNull;
+extern NSString * const RXMockNull;
 
 @interface RXMockObject : NSObject {
 	NSMutableDictionary *responses;
