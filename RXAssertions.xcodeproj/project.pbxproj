@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D415F64311A28E060027AAD8 /* RXAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D442A48D106FD99700944F07 /* RXAssertionsTests.m */; };
 		D442A493106FD9BF00944F07 /* libRXAssertions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libRXAssertions.a */; };
 		D472095311581618003F9546 /* RXMockObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D472095211581618003F9546 /* RXMockObjectTests.m */; };
 		D4C03B4A1063445800925A75 /* RXAssertions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C03B471063445800925A75 /* RXAssertions.h */; };
@@ -197,6 +198,7 @@
 			files = (
 				D472095311581618003F9546 /* RXMockObjectTests.m in Sources */,
 				D4CE0C55116FB8E400FE6B86 /* RXAssertionHelperTests.m in Sources */,
+				D415F64311A28E060027AAD8 /* RXAssertionsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

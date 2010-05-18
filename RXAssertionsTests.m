@@ -4,11 +4,22 @@
 
 #import "RXAssertions.h"
 
-@interface RXAssertionsTests : SenTestCase
+@interface RXAssertionsTests : SenTestCase {
+	NSUInteger incrementedValue;
+}
 @end
 
 @implementation RXAssertionsTests
 
+-(void)setUp {
+	incrementedValue = 0;
+}
+
+-(NSUInteger)incrementedValue {
+	return incrementedValue++;
+}
+
+#if RX_DEMONSTRATE_TEST_FAILURES
 -(void)testDemonstrateFailures {
 	BOOL condition = NO;
 	RXAssert(condition);
@@ -25,7 +36,9 @@
 	object = nil;
 	RXAssertNotNil(object);
 }
+#endif
 
+#if RX_DEMONSTRATE_TEST_FAILURES && RX_DEMONSTRATE_TEST_FAILURE_MESSAGES
 -(void)testCanAddOptionalFailureMessages {
 	BOOL condition = NO;
 	RXAssert(condition, @"This is a demonstration of an %@ failure", @"RXAssert");
@@ -41,6 +54,14 @@
 	RXAssertNil(object, @"This is a demonstration of an %@ failure.", @"RXAssertNil");
 	object = nil;
 	RXAssertNotNil(object, @"This is a demonstration of an %@ failure.", @"RXAssertNotNil");
+}
+#endif
+
+-(void)testDoesNotCauseExtraSideEffects {
+	RXAssert([self incrementedValue] == 0);
+	RXAssertFalse([self incrementedValue] == 0);
+	RXAssertEquals([self incrementedValue], 2);
+	RXAssertEquals([self incrementedValue], 3);
 }
 
 @end
