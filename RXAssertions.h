@@ -22,15 +22,15 @@
 
 // casts the expected value to the type of the actual value. will fail (and rightly so) if you try crazy casts like struct to pointer.
 #define RXAssertEquals(_actual, _expected, ...) {\
-	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(_actual))(_expected);\
-	if(![RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(_actual))]) {\
-		STFail(@"%s has value %@, not expected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(_actual))], [RXAssertionHelper descriptionForValue: &__expected ofObjCType: @encode(__typeof__(_actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
+	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(__actual))(_expected);\
+	if(![RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(__actual))]) {\
+		STFail(@"%s has value %@, not expected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(__actual))], [RXAssertionHelper descriptionForValue: &__expected ofObjCType: @encode(__typeof__(__actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
 	}\
 }
 #define RXAssertNotEquals(_actual, _expected, ...) {\
-	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(_actual))(_expected);\
-	if([RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(_actual))]) {\
-		STFail(@"%s has unexpected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(_actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
+	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(__actual))(_expected);\
+	if([RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(__actual))]) {\
+		STFail(@"%s has unexpected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(__actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
 	}\
 }
 
