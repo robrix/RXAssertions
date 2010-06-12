@@ -58,6 +58,9 @@ typedef NSString *(*RXAssertionHelperDescriptionFunction)(const void *ref);
 BOOL RXAssertionHelperObjectComparison(const void *a, const void *b);
 NSString *RXAssertionHelperObjectDescription(const void *ref);
 
+BOOL RXAssertionHelperCFTypeRefComparison(const void *a, const void *b);
+NSString *RXAssertionHelperCFTypeRefDescription(const void *ref);
+
 
 @interface RXAssertionHelper : NSObject
 

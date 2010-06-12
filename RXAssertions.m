@@ -41,6 +41,10 @@ BOOL RXAssertionHelperObjectComparison(const void *a, const void *b) {
 	return (_a == _b) || [_a isEqual: _b];
 }
 
+BOOL RXAssertionHelperCFTypeRefComparison(const void *a, const void *b) {
+	return CFEqual(*RXCast(a, CFTypeRef *), *RXCast(b, CFTypeRef *));
+}
+
 BOOL RXAssertionHelperNSPointComparison(const void *a, const void *b) {
 	return NSEqualPoints(*RXCast(a, const NSPoint *), *RXCast(b, const NSPoint *));
 }
@@ -98,6 +102,10 @@ NSString *RXAssertionHelperObjectDescription(const void *ref) {
 	return [NSString stringWithFormat: @"%@", *RXCast(ref, const id *)];
 }
 
+NSString *RXAssertionHelperCFTypeRefDescription(const void *ref) {
+	return [(id)CFCopyDescription(*RXCast(ref, CFTypeRef *)) autorelease];
+}
+
 NSString *RXAssertionHelperNSPointDescription(const void *ref) {
 	return NSStringFromPoint(*RXCast(ref, const NSPoint *));
 }
@@ -134,6 +142,10 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 	[self registerComparisonFunction: RXAssertionHelperDoubleComparison forObjCType: @encode(double)];
 	[self registerComparisonFunction: RXAssertionHelperObjectComparison forObjCType: @encode(id)];
 	[self registerComparisonFunction: RXAssertionHelperObjectComparison forObjCType: @encode(Class)];
+	CFStringRef string = NULL;
+	CFCharacterSetRef characterSet = NULL;
+	[self registerComparisonFunction: RXAssertionHelperCFTypeRefComparison forObjCType: @encode(__typeof__(string))]; // __typeof__ keeps qualifiers, e.g. const
+	[self registerComparisonFunction: RXAssertionHelperCFTypeRefComparison forObjCType: @encode(__typeof__(characterSet))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerComparisonFunction: RXAssertionHelperNSPointComparison forObjCType: @encode(NSPoint)];
 	[self registerComparisonFunction: RXAssertionHelperNSPointComparison forObjCType: @encode(CGPoint)];
 	[self registerComparisonFunction: RXAssertionHelperNSRangeComparison forObjCType: @encode(NSRange)];
@@ -151,6 +163,8 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 	[self registerDescriptionFunction: RXAssertionHelperDoubleDescription forObjCType: @encode(double)];
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(id)];
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(Class)];
+	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(string))]; // __typeof__ keeps qualifiers, e.g. const
+	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(characterSet))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(NSPoint)];
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(CGPoint)];
 	[self registerDescriptionFunction: RXAssertionHelperNSRangeDescription forObjCType: @encode(NSRange)];
