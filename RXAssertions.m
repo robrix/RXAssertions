@@ -143,8 +143,10 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 	[self registerComparisonFunction: RXAssertionHelperObjectComparison forObjCType: @encode(id)];
 	[self registerComparisonFunction: RXAssertionHelperObjectComparison forObjCType: @encode(Class)];
 	CFStringRef string = NULL;
+	CFArrayRef array = NULL;
 	CFCharacterSetRef characterSet = NULL;
 	[self registerComparisonFunction: RXAssertionHelperCFTypeRefComparison forObjCType: @encode(__typeof__(string))]; // __typeof__ keeps qualifiers, e.g. const
+	[self registerComparisonFunction: RXAssertionHelperCFTypeRefComparison forObjCType: @encode(__typeof__(array))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerComparisonFunction: RXAssertionHelperCFTypeRefComparison forObjCType: @encode(__typeof__(characterSet))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerComparisonFunction: RXAssertionHelperNSPointComparison forObjCType: @encode(NSPoint)];
 	[self registerComparisonFunction: RXAssertionHelperNSPointComparison forObjCType: @encode(CGPoint)];
@@ -164,6 +166,7 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(id)];
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(Class)];
 	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(string))]; // __typeof__ keeps qualifiers, e.g. const
+	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(array))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(characterSet))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(NSPoint)];
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(CGPoint)];
