@@ -18,4 +18,8 @@
 	// RXAssertNotEquals(NSMakeRange(0, 1), NSMakeRange(1, 2));
 }
 
+-(void)testCanTestCoreFoundationStringsForEquality {
+	RXAssertEquals(CFSTR("foo"), (CFStringRef)@"foo");
+}
+
 @end

@@ -42,7 +42,10 @@ BOOL RXAssertionHelperObjectComparison(const void *a, const void *b) {
 }
 
 BOOL RXAssertionHelperCFTypeRefComparison(const void *a, const void *b) {
-	return CFEqual(*RXCast(a, CFTypeRef *), *RXCast(b, CFTypeRef *));
+	CFTypeRef _a = *RXCast(a, CFTypeRef *), _b = *RXCast(b, CFTypeRef *);
+	return
+		(_a == _b)
+	||	((_a != nil) && (_b != nil) && CFEqual(_a, _b));
 }
 
 BOOL RXAssertionHelperNSPointComparison(const void *a, const void *b) {
@@ -103,7 +106,8 @@ NSString *RXAssertionHelperObjectDescription(const void *ref) {
 }
 
 NSString *RXAssertionHelperCFTypeRefDescription(const void *ref) {
-	return [(id)CFCopyDescription(*RXCast(ref, CFTypeRef *)) autorelease];
+	CFTypeRef _ref = *RXCast(ref, CFTypeRef *);
+	return _ref ? [(id)CFCopyDescription(_ref) autorelease] : @"(null)";
 }
 
 NSString *RXAssertionHelperNSPointDescription(const void *ref) {
