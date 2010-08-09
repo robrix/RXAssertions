@@ -28,12 +28,12 @@ BOOL RXAssertionHelperInt64Comparison(const void *a, const void *b) {
 
 BOOL RXAssertionHelperFloatComparison(const void *a, const void *b) {
 	double _a = *RXCast(a, const float *), _b = *RXCast(b, const float *);
-	return isless(MAX(_a, _b) - MIN(_a, _b), RXAssertionHelperFloatingPointComparisonAccuracy);
+	return islessequal(MAX(_a, _b) - MIN(_a, _b), RXAssertionHelperFloatingPointComparisonAccuracy);
 }
 
 BOOL RXAssertionHelperDoubleComparison(const void *a, const void *b) {
 	double _a = *RXCast(a, const double *), _b = *RXCast(b, const double *);
-	return isless(MAX(_a, _b) - MIN(_a, _b), RXAssertionHelperFloatingPointComparisonAccuracy);
+	return islessequal(MAX(_a, _b) - MIN(_a, _b), RXAssertionHelperFloatingPointComparisonAccuracy);
 }
 
 BOOL RXAssertionHelperObjectComparison(const void *a, const void *b) {
