@@ -41,7 +41,8 @@
 #define RXAssertNotNil(_thing, ...) if((_thing) == nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly nil.", #_thing))
 
 
-#ifdef __clang__
+//#ifdef __clang__
+#if 0
 	// this is bad, as strict aliasing will break it, but clang doesn’t handle union casts correctly
 	#define RXCast(x, toType) *(toType *)&(x)
 #else

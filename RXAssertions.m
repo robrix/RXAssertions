@@ -105,10 +105,10 @@ NSString *RXAssertionHelperObjectDescription(const void *ref) {
 	return [NSString stringWithFormat: @"%@", *RXCast(ref, const id *)];
 }
 
-NSString *RXAssertionHelperCFTypeRefDescription(const void *ref) {
-	CFTypeRef _ref = *RXCast(ref, CFTypeRef *);
-	return _ref ? [(id)CFCopyDescription(_ref) autorelease] : @"(null)";
-}
+//NSString *RXAssertionHelperCFTypeRefDescription(const void *ref) {
+//	CFTypeRef _ref = *RXCast(ref, CFTypeRef *);
+//	return _ref ? [(__bridge id)_ref description] : @"(null)";
+//}
 
 NSString *RXAssertionHelperNSPointDescription(const void *ref) {
 	return NSStringFromPoint(*RXCast(ref, const NSPoint *));
@@ -169,9 +169,9 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 	[self registerDescriptionFunction: RXAssertionHelperDoubleDescription forObjCType: @encode(double)];
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(id)];
 	[self registerDescriptionFunction: RXAssertionHelperObjectDescription forObjCType: @encode(Class)];
-	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(string))]; // __typeof__ keeps qualifiers, e.g. const
-	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(array))]; // __typeof__ keeps qualifiers, e.g. const
-	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(characterSet))]; // __typeof__ keeps qualifiers, e.g. const
+//	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(string))]; // __typeof__ keeps qualifiers, e.g. const
+//	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(array))]; // __typeof__ keeps qualifiers, e.g. const
+//	[self registerDescriptionFunction: RXAssertionHelperCFTypeRefDescription forObjCType: @encode(__typeof__(characterSet))]; // __typeof__ keeps qualifiers, e.g. const
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(NSPoint)];
 	[self registerDescriptionFunction: RXAssertionHelperNSPointDescription forObjCType: @encode(CGPoint)];
 	[self registerDescriptionFunction: RXAssertionHelperNSRangeDescription forObjCType: @encode(NSRange)];
@@ -232,7 +232,7 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 	[scanner scanString: @"test" intoString: nil]; // skip "test"
 	while(!scanner.isAtEnd) {
 		NSString *up = nil, *lo = nil;
-		unsigned cursor = scanner.scanLocation;
+		NSUInteger cursor = scanner.scanLocation;
 		up = [scanner.string substringWithRange: NSMakeRange(cursor, 1)]; // grab the first character
 		scanner.scanLocation = cursor + 1;
 		[scanner scanCharactersFromSet: [NSCharacterSet lowercaseLetterCharacterSet] intoString: &lo];
