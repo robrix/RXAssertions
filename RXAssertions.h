@@ -9,36 +9,38 @@
 // Don’t use this unless you’re writing your own assertions. The first argument is ignored, so the assertions can have optional messages appended to them without suffering a compiler error.
 #define RXOptionalMessageString(ignored, format, ...) [NSString stringWithFormat: (format), ## __VA_ARGS__]
 
-#define RXAssert(_expression, ...) {\
+#define RXAssert(_expression, ...) do {\
 	__typeof__(_expression) __condition = (_expression);\
 	if(!__condition)\
 		STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly false.", #_expression));\
-}
-#define RXAssertFalse(_expression, ...) {\
+} while(0)
+#define RXAssertFalse(_expression, ...) do {\
 	__typeof__(_expression) __condition = (_expression);\
 	if(__condition)\
 		STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly true.", #_expression));\
-}
+} while(0)
 
 // casts the expected value to the type of the actual value. will fail (and rightly so) if you try crazy casts like struct to pointer.
-#define RXAssertEquals(_actual, _expected, ...) {\
+#define RXAssertEquals(_actual, _expected, ...) do {\
 	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(__actual))(_expected);\
 	if(![RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(__actual))]) {\
 		STFail(@"%s has value %@, not expected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(__actual))], [RXAssertionHelper descriptionForValue: &__expected ofObjCType: @encode(__typeof__(__actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
 	}\
-}
-#define RXAssertNotEquals(_actual, _expected, ...) {\
+} while(0)
+#define RXAssertNotEquals(_actual, _expected, ...) do {\
 	__typeof__(_actual) __actual = (_actual), __expected = (__typeof__(__actual))(_expected);\
 	if([RXAssertionHelper compareValue: &__actual withValue: &__expected ofObjCType: @encode(__typeof__(__actual))]) {\
 		STFail(@"%s has unexpected value %@. %@", #_actual, [RXAssertionHelper descriptionForValue: &__actual ofObjCType: @encode(__typeof__(__actual))], RXOptionalMessageString(, ## __VA_ARGS__, @""));\
 	}\
-}
+} while(0)
 
-#define RXAssertNil(_thing, ...) {\
+#define RXAssertNil(_thing, ...) do {\
 	__typeof__(_thing) __thing = (_thing);\
 	if(__thing != nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly %@, not nil.", #_thing, __thing));\
-}
-#define RXAssertNotNil(_thing, ...) if((_thing) == nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly nil.", #_thing))
+} while(0)
+#define RXAssertNotNil(_thing, ...) do {\
+	if((_thing) == nil) STFail(RXOptionalMessageString(, ## __VA_ARGS__, @"%s was unexpectedly nil.", #_thing));\
+} while(0)
 
 
 //#ifdef __clang__
