@@ -259,8 +259,8 @@ NSString *RXAssertionHelperNSRangeDescription(const void *ref) {
 
 @implementation SenTestCase (RXAssertionsPrettierNamesForTestCases)
 
--(NSString *)name {
-	return [NSString stringWithFormat: @"%@ %@", [RXAssertionHelper humanReadableNameForTestSuiteClass: self.class], [RXAssertionHelper humanReadableNameForTestCaseSelector: self.invocation.selector]];
-}
+//-(NSString *)name {
+//	return [NSString stringWithFormat: @"%@ %@", [RXAssertionHelper humanReadableNameForTestSuiteClass: self.class], [RXAssertionHelper humanReadableNameForTestCaseSelector: self.invocation.selector]];
+//}
 
 @end
