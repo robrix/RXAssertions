@@ -1,6 +1,5 @@
 .DS_Store
-*.tmproj
-*.xcodeproj/*.pbxuser
-*.xcodeproj/*.mode*
-xcuserdata
-build
+xcuserdata/
+*.mode*
+*.pbxuser
+*.xcuserdatad
